@@ -8,5 +8,6 @@ server.use(express.json());
 server.use(helmet());
 server.use(cors());
 
-server.use("api/users", userRouter);
+server.use("/api/users", userRouter);
+
 module.exports = server;
