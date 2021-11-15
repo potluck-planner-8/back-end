@@ -3,7 +3,7 @@ const { TOKEN_SECRET } = require("../secrets");
 
 module.exports = function buildToken(user) {
   const payload = {
-    subject: user.user_id,
+    user_id: user.user_id,
     username: user.username,
   };
   const options = {

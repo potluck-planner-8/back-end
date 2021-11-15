@@ -19,7 +19,7 @@ function findById(id) {
 }
 
 function findBy(filter) {
-  return db("users").where(filter).select("user_id", "username");
+  return db("users").where(filter);
 }
 
 module.exports = {
