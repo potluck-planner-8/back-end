@@ -36,5 +36,8 @@ exports.up = async (knex) => {
 };
 
 exports.down = async (knex) => {
-  await knex.schema.dropTableIfExists("potlucks").dropTableIfExists("users");
+  await knex.schema
+    .dropTableIfExists("foods")
+    .dropTableIfExists("potlucks")
+    .dropTableIfExists("users");
 };

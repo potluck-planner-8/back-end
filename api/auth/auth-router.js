@@ -15,7 +15,7 @@ router.post("/register", CheckUsernameTaken, (req, res, next) => {
   newUser.password = hashed;
   User.insertUser(newUser)
     .then((resp) => {
-      res.status(201).json(resp);
+      res.status(201).json({ resp, hashed });
     })
     .catch((err) => {
       next(err);

@@ -20,8 +20,9 @@ const restricted = (req, res, next) => {
   });
 };
 
+//find userid on object
 const only = (user_id) => (req, res, next) => {
-  if (req.decodedJwt.user_id !== user_id) {
+  if (req.decodedJwt.user_id !== req.params.user_id) {
     next({
       status: 403,
       message: "This is not for you",
