@@ -11,8 +11,12 @@ function getAllPotlucks() {
   return db("potlucks");
 }
 
-function findById(id) {
-  return db("potlucks").where({ id }).first().select("potluck_id", "location");
+function findById(potluck_id) {
+  return db("potlucks as p")
+    .join("users as u", "u.user_id", "p.user_id")
+    .where({ potluck_id })
+    .first()
+    .select("p.potluck_id", "p.location", "u.username");
 }
 
 module.exports = {
