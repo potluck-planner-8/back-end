@@ -1,5 +1,4 @@
 const router = require("express").Router();
-const User = require("../users/userModel");
 const { restricted } = require("../auth/auth-middleware");
 const Potluck = require("./potluck-model");
 //middleware
@@ -39,7 +38,7 @@ router.get("/:potluck_id", (req, res, next) => {
     });
 });
 
-router.put("/", (req, res, next) => {
+router.put("/:potluck_id", (req, res, next) => {
   //validate body
   //insert reqbody {time, date, location, userId}
   //insert new foods on same page with...
@@ -47,7 +46,7 @@ router.put("/", (req, res, next) => {
   res.json({});
 });
 
-router.delete("/", (req, res, next) => {
+router.delete("/:potluck_id", (req, res, next) => {
   //del potluck
   res.json({});
 });
