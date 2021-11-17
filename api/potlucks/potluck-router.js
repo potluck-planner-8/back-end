@@ -2,15 +2,27 @@ const router = require("express").Router();
 const { restricted } = require("../auth/auth-middleware");
 const { validateUserMatch } = require("./potluck-middleware");
 const Potluck = require("./potluck-model");
+const Item = require("../items/item-model");
 
 router.post("/", restricted, async (req, res, next) => {
   try {
-    const { user_id } = req.body;
-    if (!user_id) {
-      req.body.user_id = req.decodedJwt.user_id;
-    }
-    const potluck = await Potluck.insertPotluck(req.body);
-    res.status(201).json(potluck);
+    const { time, date, location, items } = req.body;
+
+    const user_id = req.decodedJwt.user_id;
+
+    const body = { user_id, time, date, location };
+    Potluck.insertPotluck(body)
+      .then((resp) => {
+        if (items.length > 0) {
+          items.map((item) => {
+            Item.insertItem({ potluck_id: resp.potluck_id, item_name: item });
+          });
+        }
+        Potluck.findById(resp.potluck_id).then((resp) => {
+          res.status(201).json(resp);
+        });
+      })
+      .catch(next);
   } catch (er) {
     next(er);
   }
