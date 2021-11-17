@@ -26,6 +26,7 @@ afterAll(
 )
 
 describe('[POST] /api/auth/register', ()=>{
+    
     test('responds with 201 status code', async()=>{
         const res = await supertest(server).post('/api/auth/register').send({
             username:"tomtom",password:"tomtom"
@@ -35,7 +36,9 @@ describe('[POST] /api/auth/register', ()=>{
 })
 
 describe('[POST] /api/auth/login', ()=>{
+    
     test('respond with 200 status code', async()=>{
+        
         const res = await supertest(server).post('/api/auth/login').send({
             username:"tomtom", password:"tomtom"
         })
@@ -57,8 +60,6 @@ describe('[GET] /api/potlucks/', ()=>{
         expect(token).not.toEqual("");
 
         res = await supertest(server).get('/api/potlucks').set('Authorization', `${token}`);
-
-
         
     })
 
