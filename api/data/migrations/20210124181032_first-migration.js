@@ -20,11 +20,11 @@ exports.up = async (knex) => {
         .onDelete("CASCADE")
         .onUpdate("CASCADE");
     })
-    .createTable("foods", (foods) => {
-      foods.increments("food_id");
-      foods.string("food_name", 120).notNullable();
-      foods.boolean("food_claimed", false);
-      foods
+    .createTable("items", (items) => {
+      items.increments("item_id");
+      items.string("item_name", 120).notNullable();
+      items.boolean("item_claimed", false);
+      items
         .integer("potluck_id")
         .unsigned()
         .notNullable()
@@ -37,7 +37,7 @@ exports.up = async (knex) => {
 
 exports.down = async (knex) => {
   await knex.schema
-    .dropTableIfExists("foods")
+    .dropTableIfExists("items")
     .dropTableIfExists("potlucks")
     .dropTableIfExists("users");
 };
