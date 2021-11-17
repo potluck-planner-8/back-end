@@ -4,7 +4,6 @@ async function validateId(req, res, next) {
   Potluck.findById(req.params.potluck_id)
     .then((potluck) => {
       if (potluck.potluck_id) {
-        console.log(potluck.potluck_id);
         req.potluck = potluck;
         next();
       } else {
