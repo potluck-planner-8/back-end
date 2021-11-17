@@ -42,3 +42,74 @@ describe('[POST] /api/auth/login', ()=>{
         expect(res.status).toEqual(200);
     })
 })
+
+describe('[GET] /api/potlucks/', ()=>{
+    test('respond with 200 status code', async()=>{
+
+    })
+
+    test('respond with 401 status code', async()=>{
+
+    })
+
+})
+
+describe('[POST] /api/potlucks/', ()=>{
+    test('respond with 200 status code', async()=>{
+
+    })
+
+    test('respond with 401 status code', async()=>{
+
+    })
+
+    test('respond with 404 status code', async()=>{
+
+    })
+
+})
+
+describe('[GET] /api/:potluck_id', ()=>{
+    test('respond with 200 status code', async()=>{
+
+    })
+
+    test('respond with 401 status code', async()=>{
+
+    })
+
+    test('respond with 404 status code', async()=>{
+
+    })
+
+})
+
+describe('[PUT] /api/:potluck_id', ()=>{
+    test('respond with 200 status code', async()=>{
+
+    })
+
+    test('respond with 401 status code', async()=>{
+
+    })
+
+    test('respond with 404 status code', async()=>{
+
+    })
+
+})
+
+describe('[DELETE] /api/:potluck_id', ()=>{
+    test('respond with 200 status code', async()=>{
+
+    })
+
+    test('respond with 401 status code', async()=>{
+
+    })
+
+    test('respond with 404 status code', async()=>{
+
+    })
+
+})
