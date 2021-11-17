@@ -44,8 +44,22 @@ describe('[POST] /api/auth/login', ()=>{
 })
 
 describe('[GET] /api/potlucks/', ()=>{
+    
     test('respond with 200 status code', async()=>{
+        
+        let res = await supertest(server).post('/api/auth/register').send({
+            username:"tomtom",password:"tomtom"
+        });
+        res = await supertest(server).post('/api/auth/login').send({
+            username:"tomtom", password:"tomtom"
+        })
+        const token = res.body.token;
+        expect(token).not.toEqual("");
 
+        res = await supertest(server).get('/api/potlucks').set('Authorization', `${token}`);
+
+
+        
     })
 
     test('respond with 401 status code', async()=>{
