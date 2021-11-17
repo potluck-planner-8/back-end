@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const { restricted } = require("../auth/auth-middleware");
-const { validateUserMatch } = require("./potluck-middleware");
+const { validateUserMatch, validateId } = require("./potluck-middleware");
 const Potluck = require("./potluck-model");
 const Item = require("../items/item-model");
 
@@ -39,7 +39,7 @@ router.get("/", (req, res, next) => {
     });
 });
 
-router.get("/:potluck_id", (req, res, next) => {
+router.get("/:potluck_id", validateId, (req, res, next) => {
   //returns list of potlucks --restricted-- {owner, time, date, location}
   Potluck.findById(req.params.potluck_id)
     .then((resp) => {

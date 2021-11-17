@@ -1,16 +1,17 @@
 const Potluck = require("./potluck-model");
 
 async function validateId(req, res, next) {
-  Potluck.findById(req.params.id)
+  Potluck.findById(req.params.potluck_id)
     .then((potluck) => {
-      if (potluck) {
+      if (potluck.potluck_id) {
+        console.log(potluck.potluck_id);
         req.potluck = potluck;
         next();
       } else {
-        next({ status: 404 });
+        next({ status: 404, message: "event not found" });
       }
     })
-    .catch(next);
+    .catch((er) => next(er));
 }
 
 async function validateUserMatch(req, res, next) {
