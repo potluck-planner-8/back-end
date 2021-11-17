@@ -13,4 +13,16 @@ async function validateId(req, res, next) {
     .catch(next);
 }
 
-module.exports = { validateId };
+async function validateUserMatch(req, res, next) {
+  const potLuck = await Potluck.findById(req.params.potluck_id);
+  if (req.decodedJwt.user_id !== potLuck.user_id) {
+    next({
+      status: 403,
+      message: "This is not for you",
+    });
+  } else {
+    next();
+  }
+}
+
+module.exports = { validateId, validateUserMatch };
