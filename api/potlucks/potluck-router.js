@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { restricted } = require("../auth/auth-middleware");
+const { validateUserMatch } = require("./potluck-middleware");
 const Potluck = require("./potluck-model");
-//middleware
 
 router.post("/", restricted, async (req, res, next) => {
   try {
@@ -38,17 +38,30 @@ router.get("/:potluck_id", (req, res, next) => {
     });
 });
 
-router.put("/:potluck_id", (req, res, next) => {
-  //validate body
-  //insert reqbody {time, date, location, userId}
-  //insert new foods on same page with...
-  //return new potluck
-  res.json({});
-});
+router.put(
+  "/:potluck_id",
+  restricted,
+  validateUserMatch,
+  async (req, res, next) => {
+    try {
+      const changes = await Potluck.updateById(req.params.potluck_id, req.body);
+      res.status(200).json(changes);
+    } catch (er) {
+      next(er);
+    }
+  }
+);
+// router.put("/:potluck_id", (req, res, next) => {
+//   //validate body
+//   //insert reqbody {time, date, location, userId}
+//   //insert new foods on same page with...
+//   //return new potluck
+//
+// });
 
-router.delete("/:potluck_id", (req, res, next) => {
-  //del potluck
-  res.json({});
-});
+// router.delete("/:potluck_id", (req, res, next) => {
+//   //del potluck
+//
+// });
 
 module.exports = router;
