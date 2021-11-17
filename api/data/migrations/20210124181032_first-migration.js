@@ -27,7 +27,6 @@ exports.up = async (knex) => {
       items
         .integer("potluck_id")
         .unsigned()
-        .notNullable()
         .references("potluck_id")
         .inTable("potlucks")
         .onDelete("CASCADE")
@@ -38,6 +37,7 @@ exports.up = async (knex) => {
 exports.down = async (knex) => {
   await knex.schema
     .dropTableIfExists("items")
+    .dropTableIfExists("foods")
     .dropTableIfExists("potlucks")
     .dropTableIfExists("users");
 };
