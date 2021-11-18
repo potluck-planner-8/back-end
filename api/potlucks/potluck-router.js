@@ -55,7 +55,6 @@ router.put("/:potluck_id", restricted, validateUserMatch, (req, res, next) => {
   const body = { time, date, location };
   Potluck.updateById(req.params.potluck_id, body)
     .then((resp) => {
-      console.log(items);
       items.map((item) => {
         if (item.item_id) {
           Item.updateById(item.item_id, { item_name: item.item_name });
