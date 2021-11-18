@@ -31,7 +31,8 @@ router.post("/", async (req, res, next)=>{
         console.log("newInviteObject = ", newInviteObject);
 
         const arrayOfInvite = await inviteModel.addInvite(newInviteObject);
-        res.status(201).json(arrayOfInvite);
+
+        res.status(201).json(arrayOfInvite[0]);
 
     }catch(er){
         next(er)
