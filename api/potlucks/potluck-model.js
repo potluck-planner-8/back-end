@@ -13,7 +13,7 @@ function getAllPotlucks() {
 
 async function findById(potluck_id) {
   const potluck = await db("potlucks as p")
-    .join("users as u", "u.user_id", "p.user_id")
+    .leftJoin("users as u", "u.user_id", "p.user_id")
     .leftJoin("items as i", "p.potluck_id", "i.potluck_id")
     .select("p.*", "u.username", "i.item_id", "i.item_name")
     .where("p.potluck_id", potluck_id);
@@ -24,6 +24,7 @@ async function findById(potluck_id) {
   for (let item of potluck) {
     if (!result.potluck_id) {
       result.potluck_id = item.potluck_id;
+      result.user_id = item.user_id;
       result.username = item.username;
       result.time = item.time;
       result.date = item.date;
