@@ -27,10 +27,18 @@ router.get("/:invite_id", async (req, res, next)=>{
 router.post("/", async (req, res, next)=>{
     try{
         // res.status(200).json({message:`reached POST /api/invite/`});
-        const {user_id, postluck_id, description, accepted} = req.body;
-        const inviteObject = {user_id, postluck_id, description, accepted};
-        const newInvte = await inviteModel.insert(newInviteObject);
-        res.status(201).json(newInvite);
+        const {user_id, potluck_id, description} = req.body;
+        
+        const newInviteObject = {user_id, potluck_id, description : (description === undefined?"no description" : description), accepted:false};
+        
+        console.log("newInviteObject = ", newInviteObject);
+
+        const newInviteID = await inviteModel.addInvite(newInviteObject);
+        console.log("newInviteID = ", newInviteID);
+        
+        // const newInvite = await inviteModel.getByInviteId(newInvteID[0]);
+        
+        res.status(201).json(newInviteID);
     }catch(er){
         next(er)
     }

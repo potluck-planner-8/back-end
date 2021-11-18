@@ -10,8 +10,9 @@ async function getByInviteId(invite_id){
     return await db("invite").where("invite_id", invite_id);
 }
 
-async function insert(invite){
+async function addInvite(invite){
+    console.log("inside model, invite = ", invite);
     return await db("invite").insert(invite);
 }
 
-module.exports = {getAll, getByInviteId};
+module.exports = {getAll, getByInviteId, addInvite};
