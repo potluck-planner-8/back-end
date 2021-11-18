@@ -24,9 +24,9 @@ router.get("/:invite_id", async (req, res, next)=>{
 
 router.post("/", async (req, res, next)=>{
     try{
-        const {user_id, potluck_id, description} = req.body;
+        const {user_id, potluck_id, organizer_id, description} = req.body;
         
-        const newInviteObject = {user_id, potluck_id, description : (description === undefined?"no description" : description), accepted:false};
+        const newInviteObject = {user_id, potluck_id, organizer_id, description : (description === undefined?"no description" : description), accepted:false};
         
         console.log("newInviteObject = ", newInviteObject);
 
