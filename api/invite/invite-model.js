@@ -11,7 +11,7 @@ async function getByInviteId(invite_id){
 }
 
 async function addInvite(invite){
-    console.log("inside model, invite = ", invite);
+    console.log("inside model, addInviteinvite = ", invite);
     return await db("invite").insert(invite);
 }
 
