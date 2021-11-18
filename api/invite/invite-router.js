@@ -55,7 +55,9 @@ router.put("/:invite_id", async (req, res, next)=>{
 router.delete("/:invite_id", async (req, res, next)=>{
     try{
         const invite_id = req.params.invite_id;
-        res.status(200).json({message:`reached DELETE /api/invite/${invite_id}`});
+        // res.status(200).json({message:`reached DELETE /api/invite/${invite_id}`});
+        const respond = inviteModel.deleteInvite(invite_id);
+        res.status(200).json({message: `successfully deleted invite_id ${invite_id}`});
     }catch(er){
         next(er)
     }

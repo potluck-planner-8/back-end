@@ -11,13 +11,12 @@ async function getByInviteId(invite_id){
 }
 
 async function addInvite(invite){
-    console.log("inside model, addInviteinvite = ", invite);
-    // return await db("invite").insert(invite, ['invite_id', 'user_id', 'potluck_id','description', 'accepted']);
-    return await db("invite").insert(invite); 
+    // console.log("inside model, addInviteinvite = ", invite);
+    return await db("invite").insert(invite, ['invite_id', 'user_id', 'potluck_id','description', 'accepted']);
 }
 
-// async function delete(invite_id){
-//     return await db("invite")
-// }
+async function deleteInvite(invite_id){
+    return await db("invite").where("invite_id", invite_id).del();
+}
 
-module.exports = {getAll, getByInviteId, addInvite};
+module.exports = {getAll, getByInviteId, addInvite, deleteInvite};
