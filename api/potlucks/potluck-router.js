@@ -58,6 +58,12 @@ router.put("/:potluck_id", restricted, validateUserMatch, (req, res, next) => {
       items.map((item) => {
         if (item.item_id) {
           Item.updateById(item.item_id, { item_name: item.item_name });
+        } else if (items.length > 0) {
+          console.log("here");
+          Item.insertItem({
+            potluck_id: resp.potluck_id,
+            item_name: item,
+          });
         }
       });
 
