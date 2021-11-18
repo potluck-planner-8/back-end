@@ -38,10 +38,24 @@ router.post("/", async (req, res, next)=>{
     }
 })
 
-router.put("/:invite_id", async (req, res, next)=>{
+router.put("/", async (req, res, next)=>{
     try{
-        const invite_id = req.params.invite_id;
-        res.status(200).json({message:`reached PUT /api/invite/${invite_id}`});
+        const {invite_id, user_id, potluck_id, description, accepted} = req.body;
+        
+        const newInviteObject = {user_id, potluck_id, description , accepted};
+
+        // res.status(200).json({message:`reached PUT /api/invite/${invite_id}`});
+
+        const respond = await inviteModel.updateInvite({invite_id, user_id, potluck_id, description, accepted});
+        
+        //when respond === 1, update was a success
+        if( respond === 1){
+            res.status(201).json({message:`successfully updated invite_id ${invite_id}`});
+        }else{
+            res.status(204).json({message: "something went wrong with update invite"});
+        }
+
+        
     }catch(er){
         next(er)
     }

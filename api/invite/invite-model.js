@@ -19,4 +19,9 @@ async function deleteInvite(invite_id){
     return await db("invite").where("invite_id", invite_id).del();
 }
 
-module.exports = {getAll, getByInviteId, addInvite, deleteInvite};
+async function updateInvite(invite){
+    const {invite_id, ...inviteObject} = invite;
+    return await db("invite").update(inviteObject).where("invite_id", invite_id);
+}
+
+module.exports = {getAll, getByInviteId, addInvite, deleteInvite, updateInvite};
