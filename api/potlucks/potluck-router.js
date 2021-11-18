@@ -50,26 +50,24 @@ router.get("/:potluck_id", validateId, (req, res, next) => {
     });
 });
 
-router.put(
-  "/:potluck_id",
-  restricted,
-  validateUserMatch,
-  async (req, res, next) => {
-    try {
-      const changes = await Potluck.updateById(req.params.potluck_id, req.body);
-      res.status(200).json(changes);
-    } catch (er) {
-      next(er);
-    }
-  }
-);
-// router.put("/:potluck_id", (req, res, next) => {
-//   //validate body
-//   //insert reqbody {time, date, location, userId}
-//   //insert new foods on same page with...
-//   //return new potluck
-//
-// });
+router.put("/:potluck_id", restricted, validateUserMatch, (req, res, next) => {
+  const { time, date, location, items } = req.body;
+  const body = { time, date, location };
+  Potluck.updateById(req.params.potluck_id, body)
+    .then((resp) => {
+      console.log(items);
+      items.map((item) => {
+        if (item.item_id) {
+          Item.updateById(item.item_id, { item_name: item.item_name });
+        }
+      });
+
+      Potluck.findById(resp.potluck_id).then((resp) => {
+        res.status(201).json(resp);
+      });
+    })
+    .catch(next);
+});
 
 // router.delete("/:potluck_id", (req, res, next) => {
 //   //del potluck
