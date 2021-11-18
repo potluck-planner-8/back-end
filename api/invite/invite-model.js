@@ -12,7 +12,7 @@ async function getByInviteId(invite_id){
 
 async function addInvite(invite){
     console.log("inside model, addInviteinvite = ", invite);
-    return await db("invite").insert(invite);
+    return await db("invite").insert(invite, ['invite_id', 'user_id', 'potluck_id','description', 'accepted']);
 }
 
 module.exports = {getAll, getByInviteId, addInvite};
