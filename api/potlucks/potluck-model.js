@@ -40,26 +40,15 @@ async function findById(potluck_id) {
 
   return result;
 }
-// function findById(potluck_id) {
-//   return db("potlucks as p")
-//     .join("users as u", "u.user_id", "p.user_id")
-//     .where({ potluck_id })
-//     .first()
-//     .select(
-//       "p.potluck_id",
-//       "p.time",
-//       "p.date",
-//       "p.location",
-//       "p.potluck_id",
-//       "u.username",
-//       "u.user_id"
-//     );
-// }
 
 const updateById = async (potluck_id, potluck) => {
   await db("potlucks").update(potluck).where("potluck_id", potluck_id);
   return findById(potluck_id);
 };
+
+// function deletePotluck(potluck_id) {
+//   return db('potlucks').where({ potluck_id }).del();
+// }
 
 module.exports = {
   insertPotluck,
