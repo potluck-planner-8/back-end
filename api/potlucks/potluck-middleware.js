@@ -15,8 +15,6 @@ async function validateId(req, res, next) {
 
 async function validateUserMatch(req, res, next) {
   const potLuck = await Potluck.findById(req.params.potluck_id);
-  console.log(req.decodedJwt.user_id);
-  console.log(potLuck);
   if (req.decodedJwt.user_id !== potLuck.user_id) {
     next({
       status: 403,
