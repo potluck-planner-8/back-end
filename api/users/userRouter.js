@@ -5,8 +5,8 @@ router.get("/", async (req, res) => {
   res.json(await User.getAllUsers());
 });
 
-// router.post("/", async (req, res) => {
-//   res.status(201).json(await User.insertUser(req.body));
-// });
+//router.get("/:user_id", {});
+
+//router.get("/:user_id/invites", {});
 
 module.exports = router;
